@@ -79,13 +79,13 @@ public final class OrderlyLocator: SafeResolver, UnsafeResolver {
         storage[identifier(input: I.self, output: O.self)] = resolver
     }
     
-    func audit() throws {
+    public func audit() throws {
         try self.audit {
             Singleton { () }
         }
     }
     
-    func audit(_ configurations: OrderlyLocator) throws {
+    public func audit(_ configurations: OrderlyLocator) throws {
         let configurationsLocator = configurations
             .child { _ in
                 Singleton {
@@ -98,7 +98,7 @@ public final class OrderlyLocator: SafeResolver, UnsafeResolver {
         try parent?.audit(configurations)
     }
     
-    func audit(@RegistrationBuilder configurations: () -> Registrar) throws {
+    public func audit(@RegistrationBuilder configurations: () -> Registrar) throws {
         let configurationLocator = OrderlyLocator(configurations)
         try audit(configurationLocator)
     }
